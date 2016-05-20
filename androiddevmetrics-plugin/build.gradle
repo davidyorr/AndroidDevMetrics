@@ -1,6 +1,6 @@
 apply plugin: 'groovy'
-apply plugin: 'com.bmuschko.nexus'
-apply plugin: 'com.jfrog.bintray'
+//apply plugin: 'com.bmuschko.nexus'
+//apply plugin: 'com.jfrog.bintray'
 
 targetCompatibility = JavaVersion.VERSION_1_7
 sourceCompatibility = JavaVersion.VERSION_1_7
@@ -13,69 +13,4 @@ dependencies {
     compile 'org.aspectj:aspectjrt:1.8.8'
 }
 
-group = GROUP
-version = VERSION_NAME
-
-modifyPom {
-    project {
-        name "AndroidDevMetrics Plugin"
-        description POM_DESCRIPTION
-        url POM_URL
-        artifactId "androiddevmetrics-plugin"
-        groupId GROUP
-
-        scm {
-            url POM_SCM_URL
-            connection POM_SCM_CONNECTION
-            developerConnection POM_SCM_DEV_CONNECTION
-        }
-
-        licenses {
-            license {
-                name POM_LICENCE_NAME
-                url POM_LICENCE_URL
-                distribution POM_LICENCE_DIST
-            }
-        }
-
-        developers {
-            developer {
-                id POM_DEVELOPER_ID
-                name POM_DEVELOPER_NAME
-                email POM_DEVELOPER_EMAIL
-            }
-        }
-    }
-}
-
-extraArchive {
-    sources = true
-    tests = true
-    javadoc = true
-}
-
-// Bintray
-bintray {
-    // Global gradle.properties
-    user = project.hasProperty('BINTRAY_USER') ? project.getProperty('BINTRAY_USER') : ""
-    key = project.hasProperty('BINTRAY_KEY') ? project.getProperty('BINTRAY_KEY') : ""
-
-    configurations = ['archives']
-    pkg {
-        repo = 'maven'
-        name = 'androiddevmetrics-plugin'
-        desc = POM_DESCRIPTION
-        websiteUrl = POM_URL
-        vcsUrl = GIT_URL
-        licenses = ["Apache-2.0"]
-        publish = true
-        publicDownloadNumbers = true
-        version {
-            desc = POM_DESCRIPTION
-            gpg {
-                sign = true
-                passphrase = project.hasProperty('BINTRAY_GPG_PASSWORD') ? project.getProperty('BINTRAY_GPG_PASSWORD') : ""
-            }
-        }
-    }
-}
+apply from: rootProject.file('gradle/gradle-mvn-push.gradle')

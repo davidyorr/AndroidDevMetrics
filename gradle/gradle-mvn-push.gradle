@@ -1,0 +1,34 @@
+import groovy.util.AntBuilder
+
+apply plugin: 'maven'
+
+def getOutputDir() {
+  return "${project.buildDir}"
+}
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      repository(url: "file://" + "${project.buildDir}")
+
+      pom.groupId = GROUP
+      pom.artifactId = POM_ARTIFACT_ID
+      pom.version = VERSION_NAME
+
+      pom.project {
+        name POM_NAME
+        packaging POM_PACKAGING
+        description POM_DESCRIPTION
+      }
+    }
+  }
+}
+
+task deployToGit(dependsOn: uploadArchives) {
+  doLast {
+    rootProject.runCount += 1
+    if (rootProject.runCount == 3) {
+      rootProject.deployToGit()
+    }
+  }
+}

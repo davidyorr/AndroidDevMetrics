@@ -4,8 +4,6 @@ import org.aspectj.bridge.MessageHandler
 import org.aspectj.tools.ajc.Main
 
 apply plugin: 'com.android.library'
-apply plugin: 'com.jfrog.bintray'
-apply plugin: 'com.github.dcendents.android-maven'
 
 buildscript {
     repositories {
@@ -15,10 +13,6 @@ buildscript {
     dependencies {
         classpath 'org.aspectj:aspectjtools:1.8.8'
     }
-}
-
-repositories {
-    maven { url 'https://dl.bintray.com/frogermcs/maven/' }
 }
 
 dependencies {
@@ -86,89 +80,4 @@ android.libraryVariants.all { variant ->
     }
 }
 
-group = GROUP
-version = VERSION_NAME
-
-install {
-    repositories.mavenInstaller {
-        pom {
-            project {
-                packaging 'aar'
-                groupId GROUP
-                artifactId "androiddevmetrics-runtime"
-
-                name "AndroidDevMetrics Runtime"
-                description POM_DESCRIPTION
-                url POM_URL
-
-                licenses {
-                    license {
-                        name POM_LICENCE_NAME
-                        url POM_LICENCE_URL
-                        Distribution POM_LICENCE_DIST
-                    }
-                }
-
-                developers {
-                    developer {
-                        id POM_DEVELOPER_ID
-                        name POM_DEVELOPER_NAME
-                        email POM_DEVELOPER_EMAIL
-                    }
-                }
-
-                scm {
-                    url POM_SCM_URL
-                    connection POM_SCM_CONNECTION
-                    developerConnection POM_SCM_DEV_CONNECTION
-                }
-            }
-        }
-    }
-}
-
-// Bintray
-bintray {
-    // Global gradle.properties
-    user = project.hasProperty('BINTRAY_USER') ? project.getProperty('BINTRAY_USER') : ""
-    key = project.hasProperty('BINTRAY_KEY') ? project.getProperty('BINTRAY_KEY') : ""
-
-    configurations = ['archives']
-    pkg {
-        repo = 'maven'
-        name = 'androiddevmetrics-runtime'
-        desc = POM_DESCRIPTION
-        websiteUrl = POM_URL
-        vcsUrl = GIT_URL
-        licenses = ["Apache-2.0"]
-        publish = true
-        publicDownloadNumbers = true
-        version {
-            desc = POM_DESCRIPTION
-            gpg {
-                sign = true
-                passphrase = project.hasProperty('BINTRAY_GPG_PASSWORD') ? project.getProperty('BINTRAY_GPG_PASSWORD') : ""
-            }
-        }
-    }
-}
-
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives javadocJar
-    archives sourcesJar
-}
+apply from: rootProject.file('gradle/gradle-mvn-push.gradle')
