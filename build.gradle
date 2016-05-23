@@ -35,7 +35,7 @@ def deployToGit() {
   project.subprojects.each {
     if (!it.name.equals('GithubClient-example')) {
       def fromDir = "${it.buildDir}/com"
-      new AntBuilder().copy( todir: "${rootDir}/com" ) {
+      new AntBuilder().copy( todir: "${rootDir}/com", overwrite: true ) {
         fileset( dir: fromDir )
       }
     }
