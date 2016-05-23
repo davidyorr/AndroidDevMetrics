@@ -50,6 +50,7 @@ public class Dagger2GraphAnalyzer {
 
     @Around("providesMethod() || injectConstructor()")
     public Object logAndExecute(ProceedingJoinPoint joinPoint) throws Throwable {
+        System.out.println("logAndExecute");
         long start = System.nanoTime();
         Object result = joinPoint.proceed();
         long stop = System.nanoTime();
