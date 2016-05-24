@@ -4,7 +4,7 @@ buildscript {
     repositories {
         jcenter()
         maven {
-            url 'https://raw.githubusercontent.com/davidyorr/androiddevmetrics/mvn-repo'
+            url 'https://github.com/davidyorr/AndroidDevMetrics/raw/mvn-repo'
         }
 
         // for local snapshots
