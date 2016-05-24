@@ -11,6 +11,7 @@ import java.util.Set;
 public class InitMetric {
 
     public Class<?> cls;
+    public String providingMethod;
     public long initTimeMillis = 0;
     public int instanceNo = 0;
     public Set<InitMetric> args = new HashSet<>();
@@ -49,6 +50,10 @@ public class InitMetric {
             return className + "#" + Integer.toString(instanceNo);
         }
         return className;
+    }
+
+    public String getProvidingMethod() {
+        return providingMethod;
     }
 
     @Override

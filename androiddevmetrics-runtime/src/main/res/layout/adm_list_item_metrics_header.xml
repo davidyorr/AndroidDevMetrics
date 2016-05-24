@@ -22,6 +22,14 @@
             android:textSize="14sp" />
 
         <TextView
+            android:id="@+id/tvProvidingMethod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="frogermcs.io.githubclient.ui.activity.module.provideSplashActivityPresenter()"
+            android:textColor="@color/d2m_font_default_description"
+            android:textSize="12sp" />
+
+        <TextView
             android:id="@+id/tvInitTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

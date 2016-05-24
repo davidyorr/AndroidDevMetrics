@@ -112,16 +112,19 @@ public class ExpandableMetricsListAdapter extends BaseExpandableListAdapter {
     private class HeaderViewHolder {
         View root;
         TextView tvClassName;
+        TextView tvProvidingMethod;
         TextView tvInitTime;
 
         public HeaderViewHolder(View view) {
             this.root = view;
             tvClassName = (TextView) view.findViewById(R.id.tvClassName);
+            tvProvidingMethod = (TextView) view.findViewById(R.id.tvProvidingMethod);
             tvInitTime = (TextView) view.findViewById(R.id.tvInitTime);
         }
 
         public void bindView(MetricDescription metricDescription) {
             tvClassName.setText(metricDescription.className);
+            tvProvidingMethod.setText(metricDescription.providingMethod);
             tvInitTime.setText(metricDescription.formattedInitTime);
 
             final Resources resources = tvClassName.getContext().getResources();

@@ -1,6 +1,4 @@
 apply plugin: 'groovy'
-//apply plugin: 'com.bmuschko.nexus'
-//apply plugin: 'com.jfrog.bintray'
 
 targetCompatibility = JavaVersion.VERSION_1_7
 sourceCompatibility = JavaVersion.VERSION_1_7

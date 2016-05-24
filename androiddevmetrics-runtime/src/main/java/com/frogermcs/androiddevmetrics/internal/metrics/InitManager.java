@@ -28,10 +28,11 @@ public class InitManager {
     public final LinkedHashMap<String, InitMetric> initializedMetrics = new LinkedHashMap<>();
     public final LinkedHashMap<String, Integer> initCounter = new LinkedHashMap<>();
 
-    public void addInitMetric(Class<?> initializedClass, Object[] args, long initTimeMillis) {
+    public void addInitMetric(Class<?> initializedClass, String providingMethod, Object[] args, long initTimeMillis) {
         InitMetric initMetric = new InitMetric();
         initMetric.initTimeMillis = initTimeMillis;
         initMetric.cls = initializedClass;
+        initMetric.providingMethod = providingMethod;
 
         String simpleName = initializedClass.getName();
         if (!initializedMetrics.containsKey(simpleName)) {

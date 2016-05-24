@@ -50,7 +50,6 @@ public class Dagger2GraphAnalyzer {
 
     @Around("providesMethod() || injectConstructor()")
     public Object logAndExecute(ProceedingJoinPoint joinPoint) throws Throwable {
-        System.out.println("logAndExecute");
         long start = System.nanoTime();
         Object result = joinPoint.proceed();
         long stop = System.nanoTime();
@@ -64,12 +63,12 @@ public class Dagger2GraphAnalyzer {
         Class<?> cls = codeSignature.getDeclaringType();
 
         if (codeSignature instanceof ConstructorSignature) {
-            InitManager.getInstance().addInitMetric(cls, joinPoint.getArgs(), took);
+            InitManager.getInstance().addInitMetric(cls, codeSignature.toShortString(), joinPoint.getArgs(), took);
         }
 
         if (isMethodWithReturnType(codeSignature)) {
             if (result != null) {
-                InitManager.getInstance().addInitMetric(result.getClass(), joinPoint.getArgs(), took);
+                InitManager.getInstance().addInitMetric(result.getClass(), codeSignature.toShortString(), joinPoint.getArgs(), took);
             }
         }
 

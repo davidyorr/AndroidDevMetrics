@@ -14,6 +14,7 @@ public class MetricDescription extends MetricDescriptionTreeItem {
     public final List<MetricDescriptionTreeItem> descriptionTreeItems = new ArrayList<>();
 
     public String className;
+    public String providingMethod;
     public String formattedInitTime;
 
     public MetricDescription() {
@@ -22,6 +23,7 @@ public class MetricDescription extends MetricDescriptionTreeItem {
     public static MetricDescription InitFromMetric(InitMetric initMetric) {
         MetricDescription metricDescription = new MetricDescription();
         metricDescription.className = initMetric.getSimpleClassName();
+        metricDescription.providingMethod = initMetric.getProvidingMethod();
         metricDescription.formatInitTime(initMetric.getTotalInitTime(), initMetric.getInitTimeWithoutArgs());
         metricDescription.initDescriptionsTree(initMetric.args, 0);
         return metricDescription;
