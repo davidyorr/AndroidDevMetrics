@@ -1,4 +1,6 @@
 # AndroidDevMetrics
+> Only change I made was adding which method provided each dagger object. When there's several of the same type, the only difference was a `#` sign with a number appended (i.e. `Boolean#2`, `Boolean#3`). So with the providing method, it's clear what each object is.
+
 (formerly dagger2metrics)
 
 Performance metrics library for Android development. 
@@ -32,15 +34,20 @@ In your `build.gradle`:
  buildscript {
   repositories {
     jcenter()
+    maven { url 'https://github.com/davidyorr/AndroidDevMetrics/raw/mvn-repo' }
   }
 
   dependencies {
-    classpath 'com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:0.4'
+    classpath 'com.davidyorr.androiddevmetrics:androiddevmetrics-plugin:0.4.1'
   }
 }
 
 apply plugin: 'com.android.application'
-apply plugin: 'com.frogermcs.androiddevmetrics'
+apply plugin: 'com.davidyorr.androiddevmetrics'
+
+repositories {
+ maven { url 'https://github.com/davidyorr/AndroidDevMetrics/raw/mvn-repo' }
+}
 ```
 
 In your `Application` class:
